@@ -68,31 +68,6 @@ the page shows updated metrics without restarting the server.
 python final_project_starter.py
 ```
 
-Implement `build_features()` and `build_model()` in `final_project_starter.py`,
-then run it and copy the printed evaluation block into your report. Requires
-the real `data/synthea_enriched_features.csv` (see "Data loading" above) --
-the auto-generated fallback isn't sufficient for this.
+## GitHub Pages
 
-## Publishing to GitHub Pages
-
-`docs/index.html` is a static render of the exact same page
-`run_explorer.py` serves -- same template, same data-loading code, just
-rendered once to a file instead of per-request, so it's always identical to
-what you'd see locally. The whole page is self-contained (no CDN scripts,
-fonts, or API calls), so it works as a plain static file with zero setup.
-
-1. Regenerate it after any data or template change:
-   ```bash
-   python build_docs.py
-   ```
-2. In the repo's GitHub settings: **Settings → Pages → Source → Deploy from
-   a branch → `main` / `/docs`**.
-3. Commit and push `docs/index.html` along with your other changes.
-
-## What's intentionally not in this repo
-
-`generate_rq_answers.py` and `research_questions_answers.docx` contain the
-full instructor answer key for the Research Questions tab and are
-gitignored -- they exist locally if you generated them, but must never be
-committed or published, since this repo is intended to go public via
-GitHub Pages.
+https://ai-sandbox-ai-healthcare.github.io/neural-network-final-project/
