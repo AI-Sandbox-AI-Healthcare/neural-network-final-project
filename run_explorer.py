@@ -409,7 +409,7 @@ a{color:inherit;text-decoration:none}
 .tab-btn .tab-badge{display:inline-flex;align-items:center;justify-content:center;background:#e8a250;color:#2e1f10;border-radius:50%;width:16px;height:16px;font-size:0.69rem;font-weight:900;margin-left:5px}
 
 /* ── Page content ── */
-#page{max-width:1180px;margin:0 auto;padding:28px 20px}
+#page{max-width:1440px;margin:0 auto;padding:28px clamp(36px,6.75vw,108px)}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
 
@@ -433,7 +433,7 @@ a{color:inherit;text-decoration:none}
 /* ── Problem tab ── */
 .problem-hero{background:linear-gradient(135deg,#2e1f10 0%,#5c3d22 100%);color:#f5f0e8;border-radius:14px;padding:36px;margin-bottom:24px}
 .problem-hero h1{font-size:1.6rem;font-weight:900;margin-bottom:10px}
-.problem-hero p{font-size:0.95rem;color:#d4b896;line-height:1.7;max-width:820px}
+.problem-hero p{font-size:0.95rem;color:#d4b896;line-height:1.7;max-width:1000px}
 .pipeline-steps{display:flex;gap:0;margin:20px 0}
 .pipeline-step{flex:1;background:#fff;border:1px solid #e8ddd0;border-radius:8px;padding:14px 16px;position:relative;text-align:center}
 .pipeline-step+.pipeline-step::before{content:"→";position:absolute;left:-14px;top:50%;transform:translateY(-50%);color:#b8996c;font-size:1.16rem;font-weight:900;z-index:1}
@@ -583,7 +583,7 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
 .fe-models td{font-size:0.83rem;line-height:1.55}
 
 /* ── Model cards ── */
-.models-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:16px}
+.models-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:16px}
 .model-card{background:#fff;border-radius:14px;padding:20px;border:2px solid #e8ddd0;cursor:pointer;transition:all .2s;position:relative;user-select:none}
 .model-card:hover{border-color:#b8996c;box-shadow:0 4px 16px rgba(0,0,0,.1)}
 .model-card.selected{border-color:#e8a250;box-shadow:0 0 0 3px rgba(232,162,80,.25)}
@@ -746,7 +746,7 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
 /* ── Tab intro banner ── */
 .rq-intro-banner{display:flex;align-items:center;justify-content:space-between;gap:20px;background:#2e1f10;border-radius:14px;padding:22px 26px;margin-bottom:28px}
 .rq-intro-title{font-size:1.05rem;font-weight:900;color:#f5f0e8;margin-bottom:5px}
-.rq-intro-sub{font-size:0.84rem;color:#c4a882;line-height:1.6;max-width:520px}
+.rq-intro-sub{font-size:0.84rem;color:#c4a882;line-height:1.6;max-width:820px}
 .rq-intro-pills{display:flex;gap:10px;flex-shrink:0}
 .rq-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border-radius:20px;padding:7px 14px;font-size:0.81rem;font-weight:700;color:#c4a882;white-space:nowrap}
 .rq-pill.accent{background:#e8a250;color:#1e1208}
@@ -846,6 +846,7 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
 
 /* ── Responsive ── */
 @media(max-width:700px){
+  #page{padding:20px 16px}
   .card-grid.cols-3,.card-grid.cols-4{grid-template-columns:1fr 1fr}
   .pipeline-steps{flex-direction:column}
   .pipeline-step+.pipeline-step::before{content:"↓";left:50%;top:-14px;transform:translateX(-50%)}
