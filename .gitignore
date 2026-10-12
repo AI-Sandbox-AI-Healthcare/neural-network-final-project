@@ -7,6 +7,8 @@ __pycache__/
 .venv/
 venv/
 env/
+ai-sandbox/
+data/
 
 # Instructor-only answer key -- must never be committed to this repo.
 # generate_rq_answers.py contains the full model answers as literal text;

@@ -36,7 +36,7 @@ neural-network-final-project/
 │   └── synthea_enriched_features.csv   generated the first time you run
 │                                        run_explorer.py or build_docs.py
 │                                        (see "Data loading" below)
-├── my_model_over_30_iterations.csv     your model's metrics, read by the explorer
+├── my_model.csv                       your model's results, one row per run (5 runs), read by the explorer
 ├── final_project_starter.py            the assignment -- edit build_features()/build_model()
 ├── run_explorer.py                     Flask app, results explorer UI (localhost:3002)
 ├── start.bat                           Windows shortcut: launches run_explorer.py

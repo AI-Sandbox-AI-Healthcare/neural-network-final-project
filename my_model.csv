@@ -1,0 +1,6 @@
+iteration,seed,Accuracy,MacroAUC,Precision_1,Recall_1,F1_1,elapsed_hr,gpu_hrs,cpu_pct
+1,null,0.0,0.0,0.0,0.0,0.0,null,null,null
+2,null,0.0,0.0,0.0,0.0,0.0,null,null,null
+3,null,0.0,0.0,0.0,0.0,0.0,null,null,null
+4,null,0.0,0.0,0.0,0.0,0.0,null,null,null
+5,null,0.0,0.0,0.0,0.0,0.0,null,null,null
