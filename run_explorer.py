@@ -753,8 +753,8 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
 .rq-pill.accent{background:#e8a250;color:#1e1208}
 .rq-pill-n{font-size:1.05rem;font-weight:900}
 /* ── Section label ── */
-.rq-section-label{font-size:0.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#86674a;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #e8ddd0}
-.rq-section-note{font-weight:500;text-transform:none;letter-spacing:0;color:#9a7a5c;font-size:0.78rem}
+.rq-section-label{font-size:1.15rem;font-weight:800;color:#2e1f10;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #e8ddd0}
+.rq-section-note{font-weight:500;text-transform:none;letter-spacing:0;color:#86674a;font-size:0.92rem}
 /* ── New RQ cards ── */
 .rq2-card{display:flex;gap:0;background:#fff;border-radius:12px;border:1px solid #e8ddd0;margin-bottom:14px;overflow:hidden;transition:box-shadow .15s}
 .rq2-card:hover{box-shadow:0 4px 16px rgba(46,31,16,.08)}
