@@ -1540,7 +1540,7 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
   <div class="rq2-card">
     <div class="rq2-left"><div class="rq2-num">04</div></div>
     <div class="rq2-body">
-      <div class="rq2-title">Design a Better Label <span class="dl-report-chip">Report only, not this explorer</span></div>
+      <div class="rq2-title">Design a Better Label <span class="dl-report-chip">For report only, not this explorer</span></div>
       <p class="rq2-context">Our current binary_label identifies patients whose diagnosis text contains any of 31 predefined keywords. However, this approach may introduce noisy labels (see the Dataset tab).</p>
       <ol class="dl-steps">
         <li>Propose an improved definition of binary_label.</li>
@@ -1589,8 +1589,8 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
       <ul class="ch-reflect-list">
         <li>Everything you explored, including ideas that did not work</li>
         <li>Your reflections on each task: what you expected, what happened, and why</li>
-        <li>Your model, design choices, feature engineering, and parameters</li>
-        <li>A table of every setting needed to rerun your work, like the example</li>
+        <li>Your best model for this task, design choices, feature engineering, and parameters</li>
+        <li>A table of every setting needed to rerun your best model, like the example on right</li>
       </ul>
       <div class="ds-text" style="margin-top:8px">The goal: someone with only your report can replicate your results.</div>
     </div>
