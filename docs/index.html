@@ -272,6 +272,8 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
 .mission-hl{background:linear-gradient(transparent 58%,#fcd9a0 58%);padding:0 2px;color:#3d2a18}
 .compare-tip{display:flex;align-items:center;gap:14px;background:#fff7ed;border:1px solid #fdba74;border-left:4px solid #e8a250;border-radius:10px;padding:14px 18px;margin-bottom:20px;flex-wrap:wrap}
 .compare-tip-icon{font-size:1.5rem;flex-shrink:0}
+.cost-note{display:flex;align-items:flex-start;gap:10px;background:#fff7ed;border:1px solid #fdba74;border-left:4px solid #e8a250;border-radius:10px;padding:12px 16px;margin-top:14px;font-size:0.9rem;color:#3d2a18;line-height:1.55}
+.cost-note-icon{font-size:1.15rem;flex-shrink:0;line-height:1.35}
 .compare-tip-body{flex:1;min-width:220px}
 .compare-tip-title{font-size:0.92rem;font-weight:800;color:#2e1f10;margin-bottom:2px}
 .compare-tip-text{font-size:0.85rem;color:#6b5440;line-height:1.5}
@@ -915,8 +917,12 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
           <tbody id="comp-tbody"></tbody>
         </table>
       </div>
-      <div style="font-size:0.78rem;color:#86674a;margin-top:10px">
-        Benchmark times, GPU hours, and CPU utilization are 30-run means measured on an NVIDIA A100 (40 GB) via the NAIRR Classroom Pilot allocation. ClinicalBERT&rsquo;s time covers training its small head; its BERT embeddings are computed once beforehand. My Model values are the mean of your 5 iterations; &mdash; means not reported.<br/>Cost in dollars is an estimate: run time &times; Google Cloud on-demand price (us-central1, checked Oct 12, 2026). GPU models are priced at $3.6734/hr for an a2-highgpu-1g machine (1&times; A100 40 GB), and CPU models at $0.3885/hr for an n2-standard-8 machine. Jetstream2, where the benchmark ran, has no dollar pricing; it charges ACCESS credits. ClinicalBERT&rsquo;s one-time embedding step is not included, and Random Forest and XGBoost were timed together, so each shows their combined time.
+      <div class="cost-note">
+        <span class="cost-note-icon">⏱️</span>
+        <span>You pay for the machine while it&rsquo;s running, not just while it trains. A GPU instance left open for 2 hours costs about $7.35; a CPU one about $0.78. On Jetstream2 the same time uses up your allocation credits. Shelve the instance when you&rsquo;re done.</span>
+      </div>
+      <div style="font-size:0.8rem;color:#86674a;margin-top:10px;line-height:1.55">
+        Benchmark values are 30-run means on an NVIDIA A100 (40 GB); My Model values are the mean of your 5 runs, and &mdash; means not reported. Dollar costs use Google Cloud on-demand prices, since Jetstream2 charges credits, not dollars. Cost per run counts training time only.
       </div>
     </div>
 
@@ -2697,14 +2703,23 @@ function renderPerfTable(selected) {
 //   GPU runs: a2-highgpu-1g, 1x NVIDIA A100 40 GB (same GPU as the benchmark)  $3.6734/hr
 //   CPU runs: n2-standard-8, 8 vCPUs, 32 GB                                   $0.3885/hr
 const CLOUD_PRICE = {
-  gpu: { machine: 'a2-highgpu-1g', perHour: 3.6734 },
-  cpu: { machine: 'n2-standard-8', perHour: 0.3885 },
+  gpu: { machine: 'a2-highgpu-1g', label: 'GPU machine (1× A100)', perHour: 3.6734 },
+  cpu: { machine: 'n2-standard-8', label: 'CPU machine (8 vCPUs)', perHour: 0.3885 },
 };
 
-function estimateRunCost(m) {
-  if (m.gpuHrs > 0) return { usd: m.gpuHrs * CLOUD_PRICE.gpu.perHour, machine: CLOUD_PRICE.gpu.machine };
-  if (m.trainTimeSec != null) return { usd: m.trainTimeSec / 3600 * CLOUD_PRICE.cpu.perHour, machine: CLOUD_PRICE.cpu.machine };
+// The machine a model is priced on: GPU if it used GPU time, otherwise CPU.
+function costMachine(m) {
+  if (m.gpuHrs > 0) return CLOUD_PRICE.gpu;
+  if (m.trainTimeSec != null) return CLOUD_PRICE.cpu;
   return null;
+}
+
+// Training time only; the machine's hourly price applies for as long as it is on.
+function estimateRunCost(m) {
+  const machine = costMachine(m);
+  if (!machine) return null;
+  const hours = machine === CLOUD_PRICE.gpu ? m.gpuHrs : m.trainTimeSec / 3600;
+  return { usd: hours * machine.perHour, machine };
 }
 
 function fmtUsd(v) {
@@ -2725,9 +2740,13 @@ function renderComputeTable(selected) {
     {label: 'CPU Utilization', fn: m => m.cpuPct == null ? '<span class="na-chip">—</span>' : m.cpuPct.toFixed(1) + '%'},
     {label: 'Parameters', fn: m => m.params},
     {label: 'Interpretable?', fn: m => m.interpretable == null ? '<span class="na-chip">—</span>' : m.interpretable ? '<span class="yes-chip">✓ Yes</span>' : '<span class="no-chip">✗ No</span>'},
+    {label: "Machine Cost / Hour (while it's on)", fn: m => {
+      const machine = costMachine(m);
+      return machine ? `<strong>$${machine.perHour.toFixed(2)} / hr</strong><br/><span style="color:#86674a;font-size:0.76rem">${machine.label}</span>` : '<span class="na-chip">—</span>';
+    }},
     {label: 'Cost in Dollars / Run', fn: m => {
       const c = estimateRunCost(m);
-      return c ? `<strong>${fmtUsd(c.usd)}</strong><br/><span style="color:#86674a;font-size:0.76rem">on ${c.machine}</span>` : '<span class="na-chip">—</span>';
+      return c ? `<strong>${fmtUsd(c.usd)}</strong>` : '<span class="na-chip">—</span>';
     }},
     {label: 'Cost in Dollars / 1,000 Runs', fn: m => {
       const c = estimateRunCost(m);

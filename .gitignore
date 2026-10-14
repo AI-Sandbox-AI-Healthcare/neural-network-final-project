@@ -10,8 +10,3 @@ env/
 ai-sandbox/
 data/
 
-# Instructor-only answer key -- must never be committed to this repo.
-# generate_rq_answers.py contains the full model answers as literal text;
-# research_questions_answers.docx is its generated output.
-generate_rq_answers.py
-research_questions_answers.docx
