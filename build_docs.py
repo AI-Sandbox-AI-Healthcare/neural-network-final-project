@@ -18,6 +18,10 @@ import run_explorer
 
 OUT_DIR = Path(__file__).parent / "docs"
 OUT_FILE = OUT_DIR / "index.html"
+# GitHub Pages only: docs/analytics.js (hand-maintained, see ANALYTICS.md) sends usage
+# events to Google Analytics. The local Flask explorer never loads it.
+ANALYTICS_JS = OUT_DIR / "analytics.js"
+ANALYTICS_TAG = '<script src="analytics.js" defer></script>'
 
 
 def main() -> None:
@@ -28,6 +32,10 @@ def main() -> None:
             raw=Markup(json.dumps(run_explorer.RAW_DATA)),
             my_model=Markup(json.dumps(run_explorer.load_my_model_stats())),
         )
+    if ANALYTICS_JS.exists():
+        html = html.replace("</head>", f"{ANALYTICS_TAG}\n</head>", 1)
+    else:
+        print(f"Warning: {ANALYTICS_JS} not found -- the page will not send analytics.")
     OUT_DIR.mkdir(exist_ok=True)
     OUT_FILE.write_text(html, encoding="utf-8")
     print(f"Wrote {OUT_FILE}  ({len(html):,} bytes)")
