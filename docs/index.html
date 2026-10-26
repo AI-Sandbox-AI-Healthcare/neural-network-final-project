@@ -252,6 +252,17 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
 .dl-columns td{white-space:normal}
 .dl-checklist{list-style:none;margin:0;padding:0;font-size:0.86rem;color:#2e1f10;line-height:2}
 .dl-checklist li::before{content:"☐";margin-right:8px;color:#b45309;font-weight:800}
+.dl-path{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:-12px 0 28px}
+.dl-path-step{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid #e8ddd0;border-top:3px solid #e8a250;border-radius:10px;padding:14px 16px}
+.dl-path-num{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:#2e1f10;color:#fcd9a0;font-weight:900;font-size:0.95rem;display:flex;align-items:center;justify-content:center}
+.dl-path-title{font-size:0.98rem;font-weight:800;color:#2e1f10;margin-bottom:3px}
+.dl-path-text{font-size:0.86rem;color:#6b5440;line-height:1.55}
+.dl-path-where{display:inline-block;margin-top:6px;font-size:0.78rem;font-weight:700;color:#b45309}
+.dl-main-steps{margin:8px 0 0;padding-left:20px;line-height:1.8}
+.dl-link{color:#b45309;text-decoration:underline;text-underline-offset:2px}
+.dl-subhead{font-size:0.98rem;font-weight:800;color:#2e1f10;margin:18px 0 6px}
+.dl-handin{border:1px solid #f5d6a8;border-left:4px solid #e8a250}
+.dl-split-note{background:#fff7ed;border:1px solid #f5d6a8;border-left:4px solid #e8a250;border-radius:10px;padding:12px 16px;margin:0 0 28px;font-size:0.92rem;color:#5c3d22;line-height:1.6}
 .mm-upload{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0 8px}
 .mm-btn{display:inline-block;background:#fff;color:#3d2a18;border:1px solid #d6c3a8;padding:7px 14px;border-radius:8px;font-weight:700;font-size:0.83rem;cursor:pointer;font-family:inherit}
 .mm-btn:hover{background:#f0e8d8}
@@ -474,6 +485,9 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
   .pipeline-step+.pipeline-step::before{content:"↓";left:50%;top:-14px;transform:translateX(-50%)}
   .eda-grid{grid-template-columns:1fr}
   .fe-files-row{flex-direction:column;gap:4px}
+  .dl-path{grid-template-columns:1fr}
+  .rq-intro-banner{flex-direction:column;align-items:flex-start}
+  .rq-intro-pills{flex-wrap:wrap}
 }
 @media(max-width:480px){
   .ds-legend{grid-template-columns:1fr}
@@ -495,8 +509,8 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
 
 <!-- ── Tab navigation ── -->
 <div id="tab-nav">
-  <button class="tab-btn active" data-tab="problem">Problem</button>
-  <button class="tab-btn" data-tab="dataset">Dataset</button>
+  <button class="tab-btn active" data-tab="problem">Overview</button>
+  <button class="tab-btn" data-tab="dataset">Problem + Dataset</button>
   <button class="tab-btn" data-tab="features">Feature Engineering</button>
   <button class="tab-btn" data-tab="models">Models <span class="tab-badge" id="cart-count" style="display:none">0</span></button>
   <button class="tab-btn" data-tab="compare">Compare</button>
@@ -1087,18 +1101,46 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
   <div class="rq-intro-banner">
     <div class="rq-intro-left">
       <div class="rq-intro-title">Deliverables</div>
-      <div class="rq-intro-sub">Everything you hand in for the final project: a written report with your task reflections, and your best model&rsquo;s results file. Submit your report to D2L, and upload your best model&rsquo;s my_model.csv here to update your model card.</div>
+      <div class="rq-intro-sub">Your final project has three parts: build your best model, work through five tasks, and write a report. Commit your code to GitHub, upload your best model&rsquo;s my_model.csv here, and submit your report to D2L.</div>
     </div>
     <div class="rq-intro-pills">
-      <div class="rq-pill"><span class="rq-pill-n">4</span>Tasks</div>
+      <div class="rq-pill accent"><span class="rq-pill-n">1</span>Main task</div>
+      <div class="rq-pill"><span class="rq-pill-n">5</span>Tasks</div>
       <div class="rq-pill"><span class="rq-pill-n">1</span>Report</div>
-      <div class="rq-pill accent"><span class="rq-pill-n">1</span>Results file</div>
+    </div>
+  </div>
+
+  <!-- ── The three parts at a glance ── -->
+  <div class="dl-path">
+    <div class="dl-path-step">
+      <div class="dl-path-num">1</div>
+      <div>
+        <div class="dl-path-title">Build your best model</div>
+        <div class="dl-path-text">Improve the starter code, run your final model 5 times, commit your code, and upload my_model.csv.</div>
+        <span class="dl-path-where">Main Task &middot; upload here</span>
+      </div>
+    </div>
+    <div class="dl-path-step">
+      <div class="dl-path-num">2</div>
+      <div>
+        <div class="dl-path-title">Work through 5 tasks</div>
+        <div class="dl-path-text">Run each experiment, compare the result with what you expected, and note what you learned.</div>
+        <span class="dl-path-where">Tasks &middot; for your report</span>
+      </div>
+    </div>
+    <div class="dl-path-step">
+      <div class="dl-path-num">3</div>
+      <div>
+        <div class="dl-path-title">Write your report</div>
+        <div class="dl-path-text">Explain your model and your task reflections so someone else can replicate your results.</div>
+        <span class="dl-path-where">Report &middot; submit to D2L</span>
+      </div>
     </div>
   </div>
 
   <!-- ── Data splits ── -->
   <div class="rq-section-label">Data Splits <span class="rq-section-note">— 12,352 patients, split the same way for every model</span></div>
-  <div class="card" style="padding:0;overflow:hidden;margin-bottom:10px">
+  <div class="card" style="padding:0;overflow-x:auto;margin-bottom:10px">
     <table class="comp-table dl-splits">
       <thead>
         <tr><th>Split</th><th>Patients</th><th style="width:32%">Share of all patients</th><th>Class 0 (negative)</th><th>Class 1 (positive)</th></tr>
@@ -1111,82 +1153,30 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
       </tbody>
     </table>
   </div>
-  <div class="ds-note" style="margin-bottom:28px">The split is stratified, so every part keeps the same class balance. Use the training set to fit your model, the validation set to tune your choices, and the test set only for your final scores.</div>
+  <div class="dl-split-note">The split is stratified, so every part keeps the same class balance. Use the training set to fit your model, the validation set to tune your choices, and the test set only for your final scores.</div>
 
-  <!-- ── Tasks ── -->
-  <div class="rq-section-label">Tasks <span class="rq-section-note">— experiments to reflect on in your report</span></div>
-  <div class="mission-callout">
-    <div class="mission-icon">📌</div>
-    <div class="mission-text">These tasks change your model on purpose: less training data, removed features, missing values. They are for <span class="mission-hl">reflection in your report only</span>. Do not upload their results; my_model.csv is for your best model.</div>
-  </div>
-
-  <div class="rq2-card">
-    <div class="rq2-left"><div class="rq2-num">01</div></div>
-    <div class="rq2-body">
-      <div class="rq2-title">How Much Training Data Does Your Model Need?</div>
-      <p class="rq2-context">Design your model, then train it three times: on 1,000, 4,000, and all 8,646 training patients. Keep the same validation and test patients for every run, so the only thing that changes is the amount of training data.</p>
-      <ol class="dl-steps">
-        <li>Before each run, write down what you expect to happen and why.</li>
-        <li>Run your model.</li>
-        <li>Compare the result with your expectation and explain any gap.</li>
-      </ol>
-      <div class="rq2-question">It is okay to be wrong. If your expectation missed, explain why you were wrong and what you learned.</div>
-    </div>
-  </div>
-
-  <div class="rq2-card">
-    <div class="rq2-left"><div class="rq2-num">02</div></div>
-    <div class="rq2-body">
-      <div class="rq2-title">Which Features Drive Your Model?</div>
-      <p class="rq2-context">Find out which features your best-performing model relies on most, then test what happens without them.</p>
-      <ol class="dl-steps">
-        <li>Identify the top features contributing to your best-performing model, and explain why you think they matter most.</li>
-        <li>Remove the top two features and retrain your model.</li>
-        <li>Report the new results.</li>
-      </ol>
-      <div class="rq2-question">Explain your updated results and the reasoning behind them. Did performance change the way you expected, and what does that tell you about the remaining features?</div>
-    </div>
-  </div>
-
-  <div class="rq2-card">
-    <div class="rq2-left"><div class="rq2-num">03</div></div>
-    <div class="rq2-body">
-      <div class="rq2-title">How Robust Is Your Model to Missing Data?</div>
-      <p class="rq2-context">Real health records are often incomplete. Simulate this by hiding values in your most important features.</p>
-      <ol class="dl-steps">
-        <li>Randomly set 50% of the values in each of your top 3 features to missing. Use a fixed random seed so you can reproduce it.</li>
-        <li>Before running, predict how your model&rsquo;s performance will change and why.</li>
-        <li>Fill the missing values using a statistic, such as the mean or median, computed on the training set.</li>
-        <li>Run your code and report the results.</li>
-      </ol>
-      <div class="rq2-question">Compare the results with your expectation and explain any gap. It is okay to be wrong; reason about why and what you learned.</div>
-    </div>
-  </div>
-
-  <div class="rq2-card">
-    <div class="rq2-left"><div class="rq2-num">04</div></div>
-    <div class="rq2-body">
-      <div class="rq2-title">Design a Better Label <span class="dl-report-chip">For report only, not this explorer</span></div>
-      <p class="rq2-context">Our current binary_label identifies patients whose diagnosis text contains any of 31 predefined keywords. However, this approach may introduce noisy labels (see the Dataset tab).</p>
-      <ol class="dl-steps">
-        <li>Propose an improved definition of binary_label.</li>
-        <li>Justify each of your labeling rules.</li>
-        <li>Report how many patients would receive a different label and how the class distribution changes.</li>
-        <li>Using your new labels, retrain and evaluate one machine learning model for a single run. Report its performance and briefly discuss your findings.</li>
-      </ol>
-      <div class="rq2-question">For each rule, explain what noise it removes and what real cases it might miss.</div>
-      <div class="ch-warn-box" style="margin:10px 0 0"><strong>⚠️ Important</strong>Be mindful of data leakage when selecting input features. Do not use information that directly defines or reveals your target label as a model input.</div>
-    </div>
-  </div>
-
-  <!-- ── Results file ── -->
-  <div class="rq-section-label" id="results-file" style="margin-top:28px;scroll-margin-top:16px">Results File <span class="rq-section-note">— upload my_model.csv here</span></div>
+  <!-- ── Main task: build the best model, upload its results file ── -->
+  <div class="rq-section-label" id="results-file" style="scroll-margin-top:16px">Main Task <span class="rq-section-note">— build your best model and upload its results here</span></div>
   <div class="card" style="margin-bottom:28px">
     <div class="mission-callout">
       <div class="mission-icon">🏆</div>
-      <div class="mission-text">Upload <span class="mission-hl">your best model only</span>: run it 5 times, each with a different random seed, and record its performance in my_model.csv, one row per run. Results from the task experiments belong in your report, not in this file. We ask for 5 runs instead of the benchmark’s 30 because of limited computational resources.</div>
+      <div class="mission-text">
+        Build the best model you can, then compare it with the provided baselines.
+        <ol class="dl-main-steps">
+          <li>Start from the template code</li>
+          <li>Improve the feature engineering as needed.</li>
+          <li>Pick any model you like and fine-tune it.</li>
+          <li>Run your final model 5 times, each with a different random seed, and record the results in my_model.csv.</li>
+          <li>Commit your updated code to GitHub, following the instructions in the template.</li>
+          <li>Upload my_model.csv below. My Model on the Models tab updates, so you can compare it with the baselines there and on the Compare tab.</li>
+        </ol>
+        <div style="margin-top:8px">Goal: <span class="mission-hl">beat the best CPU model</span> to unlock the GPU tier, then <span class="mission-hl">beat the best GPU model</span> to complete the task. F1-Score is the primary metric, and an F1 above 0.75 counts as good performance.</div>
+      </div>
     </div>
-    <div class="ds-text">Start from the template and keep the column names exactly as they are. Every column needs a real value in every row: blank, null, and 0 are not accepted, except gpu_hrs, which is 0 if you trained on a CPU. If anything is missing or invalid, the upload is rejected with a list of what to fix.</div>
+    <div class="ds-text">Upload <span class="mission-hl">your best model here for comparison with benchmarks</span>. Results from the task experiments belong in your report. We ask for 5 runs instead of the benchmark&rsquo;s 30 because of limited computational resources.</div>
+
+    <div class="dl-subhead">Fill in my_model.csv</div>
+    <div class="ds-text">Download the template below and keep the column names exactly as they are. Every column needs a real value in every row: blank, null, and 0 are not accepted, except gpu_hrs, which is 0 if you trained on a CPU. If anything is missing or invalid, the upload is rejected with a list of what to fix.</div>
     <table class="comp-table dl-columns">
       <thead><tr><th>Column</th><th>What to enter</th></tr></thead>
       <tbody>
@@ -1204,21 +1194,106 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
       <label class="mm-btn mm-btn-primary">&uarr; Upload my_model.csv<input type="file" accept=".csv,text/csv" hidden onchange="handleMyModelUpload(this)"></label>
       <div class="mm-upload-status"></div>
     </div>
-    <div class="ds-note">Uploading updates your model card (My Model) on the Models tab, so you can compare it with the benchmark models. Upload again after each improvement.</div>
+    <div class="ds-note">Your upload is saved in this browser only. Upload again whenever your model improves; the new file replaces the old one.</div>
+  </div>
+
+  <!-- ── Tasks ── -->
+  <div class="rq-section-label">Tasks <span class="rq-section-note">— experiments to reflect on in your report</span></div>
+  <div class="mission-callout">
+    <div class="mission-icon">📌</div>
+    <div class="mission-text">These tasks are for <span class="mission-hl">reflection in your report only</span>. Use your best model from the Main Task in every task, so you can compare each result with it. Tasks 1 to 3 change the data on purpose: less training data, removed features, missing values. Tasks 4 and 5 question the label itself. Do not upload their results; my_model.csv is for your best model.</div>
+  </div>
+
+  <div class="rq2-card">
+    <div class="rq2-left"><div class="rq2-num">01</div></div>
+    <div class="rq2-body">
+      <div class="rq2-title">How Does Training Data Size Affect Performance?</div>
+      <p class="rq2-context">Train your best model on 4 training set sizes: 100, 1,000, 4,000, and all 8,646 patients. Run it 5 times at each size, each with a different random seed, for 20 runs in total. Keep the same validation and test patients for every run, so the only thing that changes is the amount of training data.</p>
+      <ol class="dl-steps">
+        <li>Before you start, write down how you expect performance to change as the training set grows, and why.</li>
+        <li>For each size, draw a random, stratified sample of that many training patients. Use the run&rsquo;s seed for the sample, so it can be reproduced.</li>
+        <li>Train and evaluate your model 5 times at each size, using the same 5 seeds as your Main Task. Your Main Task runs already cover the 8,646 size.</li>
+        <li>Report the mean and standard deviation of your metrics for each size, in a table or a plot of F1-Score against training size.</li>
+        <li>Compare the results with your expectation and explain any gap.</li>
+      </ol>
+      <div class="rq2-question">It is okay to be wrong. If your expectation missed, explain why and what you learned.</div>
+    </div>
+  </div>
+
+  <div class="rq2-card">
+    <div class="rq2-left"><div class="rq2-num">02</div></div>
+    <div class="rq2-body">
+      <div class="rq2-title">What Happens When Important Features Are Removed?</div>
+      <p class="rq2-context">Find out which features your best model relies on most, then test how much it depends on them.</p>
+      <ol class="dl-steps">
+        <li>Identify your model&rsquo;s top features, using a method such as permutation importance or SHAP. Explain why you think they matter most.</li>
+        <li>Before retraining, predict how performance will change without the top two features.</li>
+        <li>Remove the top two features and train your model 5 times, using the same 5 seeds as your Main Task.</li>
+        <li>Report the mean and standard deviation of your metrics next to your Main Task results.</li>
+      </ol>
+      <div class="rq2-question">Explain your updated results and the reasoning behind them. Did performance change the way you expected, and what does that tell you about the remaining features?</div>
+    </div>
+  </div>
+
+  <div class="rq2-card">
+    <div class="rq2-left"><div class="rq2-num">03</div></div>
+    <div class="rq2-body">
+      <div class="rq2-title">How Does Missing Data Affect Performance?</div>
+      <p class="rq2-context">Real health records are often incomplete. Simulate this by hiding half the values in your most important features, then filling them back in.</p>
+      <ol class="dl-steps">
+        <li>Start from your full feature set, not the Task 2 version. Take the top 3 features you found in Task 2 and randomly set 50% of each one&rsquo;s values to missing, in the training, validation, and test sets. Use a fixed seed so the same values go missing every time.</li>
+        <li>Before running, predict how your model&rsquo;s performance will change and why.</li>
+        <li>Fill the missing values with a statistic, such as the mean or median. Compute it on the training set only, and use it to fill all three sets.</li>
+        <li>Train your model 5 times, using the same 5 seeds as your Main Task, and report the mean and standard deviation of your metrics next to your Main Task results.</li>
+      </ol>
+      <div class="rq2-question">Compare the results with your expectation and explain any gap. It is okay to be wrong; reason about why and what you learned.</div>
+    </div>
+  </div>
+
+  <div class="rq2-card">
+    <div class="rq2-left"><div class="rq2-num">04</div></div>
+    <div class="rq2-body">
+      <div class="rq2-title">Is Your Model Learning or Leaking?</div>
+      <p class="rq2-context">Data leakage happens when a model uses information that directly or indirectly reveals the answer it is supposed to predict. In our dataset, the label is created from description text in conditions.csv. Even if we remove the descriptions, the diagnosis codes (CODE) may still reveal which patients have chronic pain. A model using these codes could achieve high performance by identifying the diagnoses used to create the label, rather than learning meaningful patterns from other patient information.</p>
+      <ol class="dl-steps">
+        <li>Review the 16 raw CSV files and identify columns that could reveal the label, directly or indirectly, explaining why.</li>
+        <li>Compare conditions in positive and negative patients, identify common comorbidities, and explain their possible clinical relationships.</li>
+        <li>Trace how a diagnosis connects to medications, procedures, and encounters across CSV files, using one example.</li>
+        <li>Examine your best model&rsquo;s features, identify potential leakage, and explain how you would address it.</li>
+      </ol>
+      <div class="rq2-question">For each risk you find, decide whether it is leakage or a fair predictive signal, and explain your reasoning.</div>
+    </div>
+  </div>
+
+  <div class="rq2-card">
+    <div class="rq2-left"><div class="rq2-num">05</div></div>
+    <div class="rq2-body">
+      <div class="rq2-title">Can You Design a Better Label?</div>
+      <p class="rq2-context">Our current binary_label marks a patient positive if any diagnosis text contains one of 31 pain keywords. This adds noisy labels (see the Dataset tab) and ignores comorbidity: pain often comes together with other conditions. Use what you learned in Tasks 1 to 4 to build a better label.</p>
+      <ol class="dl-steps">
+        <li>Using the conditions you found together in Task 4, decide how your label should handle comorbidity.</li>
+        <li>Propose an improved definition of binary_label with clear criteria, and justify each rule.</li>
+        <li>Report how many patients would receive a different label and how the class balance changes.</li>
+        <li>Retrain your best model on the new labels for 5 times (different seed), keeping the same training, validation, and test patients. Report its performance and briefly discuss your findings.</li>
+      </ol>
+      <div class="rq2-question">For each rule, explain what noise it removes and what real cases it might miss. What is a better way to address comorbidity in the label, and why?</div>
+      <div class="ch-warn-box" style="margin:10px 0 0"><strong>⚠️ Important</strong>Be mindful of data leakage when selecting input features (see Task 4). Do not use information that directly defines or reveals your target label as a model input.</div>
+    </div>
   </div>
 
   <!-- ── Report ── -->
-  <div class="rq-section-label">Report</div>
+  <div class="rq-section-label" style="margin-top:28px">Report</div>
   <div class="card-grid cols-2" style="margin-bottom:28px">
     <div class="card">
       <div class="ds-card-title">📝 What to include</div>
       <ul class="ch-reflect-list">
+        <li>Your best model: design choices, feature engineering, and parameters</li>
+        <li>How your model compares with the baselines on performance and cost</li>
+        <li>Your reflections on each of the 5 tasks: what you expected, what happened, and why</li>
         <li>Everything you explored, including ideas that did not work</li>
-        <li>Your reflections on each task: what you expected, what happened, and why</li>
-        <li>Your best model for this task, design choices, feature engineering, and parameters</li>
-        <li>A table of every setting needed to rerun your best model, like the example on right</li>
+        <li>A table of every setting needed to rerun your best model, like the example on the right</li>
       </ul>
-      <div class="ds-text" style="margin-top:8px">The goal: someone with only your report can replicate your results.</div>
+      <div class="ds-text" style="margin-top:10px">The goal: <span class="mission-hl">someone with only your report can replicate your results.</span></div>
     </div>
     <div class="card">
       <div class="ds-card-title">📋 Example settings table</div>
@@ -1231,6 +1306,7 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
           <tr><td>Hyperparameters</td><td>Every value you set</td></tr>
           <tr><td>Random seeds</td><td>e.g., 43, 44, 45, 46, 47</td></tr>
           <tr><td>Training data</td><td>Number of training patients; same validation and test sets</td></tr>
+          <tr><td>Code</td><td>Link to your GitHub repository and the commit you used</td></tr>
           <tr><td>Software</td><td>Python and library versions</td></tr>
           <tr><td>Hardware</td><td>CPU or GPU used</td></tr>
         </tbody>
@@ -1240,10 +1316,11 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
 
   <!-- ── Hand in ── -->
   <div class="rq-section-label">What to Hand In</div>
-  <div class="card">
+  <div class="card dl-handin">
     <ul class="dl-checklist">
-      <li>Your report, including your reflections on each task: submit it to D2L</li>
-      <li>Your best model&rsquo;s performance over 5 runs (my_model.csv): upload it in the Results File section above</li>
+      <li>Your updated code: commit it to GitHub, following the instructions in the template</li>
+      <li>Your best model&rsquo;s results over 5 runs (my_model.csv): upload it in the Main Task section above</li>
+      <li>Your report, with your best model, its comparison with the baselines, and your reflections on all 5 tasks: submit it to D2L</li>
     </ul>
   </div>
 
