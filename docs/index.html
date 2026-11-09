@@ -1281,8 +1281,20 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
     </div>
   </div>
 
+  <!-- ── GitHub repository ── -->
+  <div class="rq-section-label" style="margin-top:28px">GitHub Repository <span class="rq-section-note">— everything a classmate needs to run your code</span></div>
+  <div class="card" style="margin-bottom:28px">
+    <div class="ds-text">Before you submit, make sure your repository is complete and up to date:</div>
+    <ul class="dl-checklist">
+      <li>All scripts to train, test, and evaluate your model</li>
+      <li>Every task-specific .py file you used</li>
+      <li>All outputs, results, and analysis artifacts, organized in the analysis folder</li>
+      <li>Setup instructions, dependencies, configurations, and the commands to run</li>
+    </ul>
+  </div>
+
   <!-- ── Report ── -->
-  <div class="rq-section-label" style="margin-top:28px">Report</div>
+  <div class="rq-section-label">Report <span class="rq-section-note">— a classmate will use it to reproduce your work</span></div>
   <div class="card-grid cols-2" style="margin-bottom:28px">
     <div class="card">
       <div class="ds-card-title">📝 What to include</div>
@@ -1291,9 +1303,10 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
         <li>How your model compares with the baselines on performance and cost</li>
         <li>Your reflections on each of the 5 tasks: what you expected, what happened, and why</li>
         <li>Everything you explored, including ideas that did not work</li>
+        <li>Step-by-step instructions to reproduce each experiment, and the results to expect</li>
         <li>A table of every setting needed to rerun your best model, like the example on the right</li>
       </ul>
-      <div class="ds-text" style="margin-top:10px">The goal: <span class="mission-hl">someone with only your report can replicate your results.</span></div>
+      <div class="ds-text" style="margin-top:10px">Keep it detailed and well organized. The goal: <span class="mission-hl">a classmate with only your report and repository can reproduce your results.</span></div>
     </div>
     <div class="card">
       <div class="ds-card-title">📋 Example settings table</div>
@@ -1318,11 +1331,42 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
   <div class="rq-section-label">What to Hand In</div>
   <div class="card dl-handin">
     <ul class="dl-checklist">
-      <li>Your updated code: commit it to GitHub, following the instructions in the template</li>
+      <li>Your complete repository, as listed in the GitHub Repository section above: commit it to GitHub</li>
       <li>Your best model&rsquo;s results over 5 runs (my_model.csv): upload it in the Main Task section above</li>
-      <li>Your report, with your best model, its comparison with the baselines, and your reflections on all 5 tasks: submit it to D2L</li>
+      <li>Your report, as described in the Report section above: submit it to D2L</li>
     </ul>
   </div>
+
+  <!-- ── What's next: peer reproducibility review ── -->
+  <div class="rq-section-label" id="peer-review" style="margin-top:28px;scroll-margin-top:16px">What&rsquo;s Next? Peer Reproducibility Review <span class="rq-section-note">— after you submit</span></div>
+  <div class="mission-callout">
+    <div class="mission-icon">🔁</div>
+    <div class="mission-text">You will reproduce one classmate&rsquo;s work, and another student will reproduce yours. This review is required and counts toward your grade. The goal is not just to complete the experiments, but to make your work <span class="mission-hl">understandable, verifiable, and reproducible</span> by someone else.</div>
+  </div>
+  <div class="dl-path" style="margin:0 0 14px">
+    <div class="dl-path-step">
+      <div class="dl-path-num">1</div>
+      <div>
+        <div class="dl-path-title">Clone the repository</div>
+        <div class="dl-path-text">Get your classmate&rsquo;s code, outputs, and analysis folder from GitHub.</div>
+      </div>
+    </div>
+    <div class="dl-path-step">
+      <div class="dl-path-num">2</div>
+      <div>
+        <div class="dl-path-title">Follow the report</div>
+        <div class="dl-path-text">Set up the environment and run each experiment using only their instructions.</div>
+      </div>
+    </div>
+    <div class="dl-path-step">
+      <div class="dl-path-num">3</div>
+      <div>
+        <div class="dl-path-title">Compare the results</div>
+        <div class="dl-path-text">Check whether the numbers you get are comparable to the ones they reported.</div>
+      </div>
+    </div>
+  </div>
+  <div class="dl-split-note">A classmate will do the same with your work, without extra files or explanations from you. Check your repository and report against the sections above before you submit.</div>
 
 </div>
 </div><!-- /tab-challenges -->
