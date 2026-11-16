@@ -1556,7 +1556,7 @@ tbody td{padding:8px 12px;border-bottom:1px solid #f0e8d8;white-space:nowrap;col
     <div class="ds-text">Upload <span class="mission-hl">your best model here for comparison with benchmarks</span>. Results from the task experiments belong in your report. We ask for 5 runs instead of the benchmark&rsquo;s 30 because of limited computational resources.</div>
 
     <div class="dl-subhead">Fill in my_model.csv</div>
-    <div class="ds-text">Download the template below and keep the column names exactly as they are. Every column needs a real value in every row: blank, null, and 0 are not accepted, except gpu_hrs, which is 0 if you trained on a CPU. If anything is missing or invalid, the upload is rejected with a list of what to fix.</div>
+    <div class="ds-text">Download the template below and keep the column names exactly as they are. Copy the values from your generated metrics CSV. Fill every cell. A recorded 0 is valid for metrics and resource usage, including GPU hours for CPU runs. If anything is missing or invalid, the upload is rejected with a list of what to fix.</div>
     <table class="comp-table dl-columns">
       <thead><tr><th>Column</th><th>What to enter</th></tr></thead>
       <tbody>
@@ -2904,15 +2904,14 @@ function updateCompareBar() {
 }
 
 // ── My Model results file: template download, upload, status ─────────────────
-// Column names must match the template exactly; each row is one run. Every cell needs a
-// real value: blank, null, and 0 are rejected, except gpu_hrs, which is 0 for CPU training.
+// Each row is one run. Blank and null cells are missing. Numeric results can be zero
+// when the column's range allows it.
 const MY_MODEL_METRIC_COLS = { Accuracy: 'accuracy', MacroAUC: 'auc', Precision_1: 'precision', Recall_1: 'recall', F1_1: 'f1' };
 const MY_MODEL_COST_COLS = ['elapsed_hr', 'gpu_hrs', 'cpu_pct'];
 const MY_MODEL_COLUMNS = ['iteration', 'seed', ...Object.keys(MY_MODEL_METRIC_COLS), ...MY_MODEL_COST_COLS];
-const MY_MODEL_ZERO_OK = new Set(['gpu_hrs']);
 const MY_MODEL_RUNS = 5;
 const MY_MODEL_TEMPLATE = MY_MODEL_COLUMNS.join(',') + '\n' +
-  [1, 2, 3, 4, 5].map(i => `${i},null,0.0,0.0,0.0,0.0,0.0,null,null,null`).join('\n') + '\n';
+  Array.from({ length: MY_MODEL_RUNS }, (_, i) => (i + 1) + ','.repeat(MY_MODEL_COLUMNS.length - 1)).join('\n') + '\n';
 const isMissingValue = v => ['', 'null', 'none', 'na', 'nan'].includes(String(v ?? '').trim().toLowerCase());
 
 function downloadMyModelTemplate() {
@@ -2967,17 +2966,15 @@ function validateMyModelCsv(text) {
     const filled = MY_MODEL_COLUMNS.filter(c => !isMissingValue(r[c]));
     const notNumbers = filled.filter(c => !Number.isFinite(num(c)));
     if (notNumbers.length) errors.push(`${where}: ${notNumbers.join(', ')} must be ${notNumbers.length > 1 ? 'numbers' : 'a number'}.`);
-    const zeros = filled.filter(c => !MY_MODEL_ZERO_OK.has(c) && Number.isFinite(num(c)) && num(c) === 0);
-    if (zeros.length) errors.push(`${where}: ${zeros.join(', ')} ${zeros.length > 1 ? 'are' : 'is'} 0, which is not a valid value. Enter your results.`);
-    const ok = c => !isMissingValue(r[c]) && Number.isFinite(num(c)) && (num(c) !== 0 || MY_MODEL_ZERO_OK.has(c));
+    const ok = c => !isMissingValue(r[c]) && Number.isFinite(num(c));
     if (ok('iteration') && !(Number.isInteger(num('iteration')) && num('iteration') >= 1 && num('iteration') <= MY_MODEL_RUNS)) {
       errors.push(`${where}: iteration must be a whole number from 1 to ${MY_MODEL_RUNS}.`);
     }
-    if (ok('seed') && !Number.isInteger(num('seed'))) errors.push(`${where}: seed must be a whole number.`);
+    if (ok('seed') && (!Number.isInteger(num('seed')) || num('seed') === 0)) errors.push(`${where}: seed must be a non-zero whole number.`);
     Object.keys(MY_MODEL_METRIC_COLS).forEach(c => {
       if (ok(c) && (num(c) < 0 || num(c) > 1)) errors.push(`${where}: ${c} must be between 0 and 1 (for example 0.72, not 72).`);
     });
-    if (ok('elapsed_hr') && num('elapsed_hr') < 0) errors.push(`${where}: elapsed_hr must be greater than 0 (training time in hours).`);
+    if (ok('elapsed_hr') && num('elapsed_hr') < 0) errors.push(`${where}: elapsed_hr must be 0 or more (training time in hours).`);
     if (ok('gpu_hrs') && num('gpu_hrs') < 0) errors.push(`${where}: gpu_hrs must be 0 or more (use 0 if you trained on a CPU).`);
     if (ok('cpu_pct') && (num('cpu_pct') < 0 || num('cpu_pct') > 100)) errors.push(`${where}: cpu_pct must be between 0 and 100.`);
   });
